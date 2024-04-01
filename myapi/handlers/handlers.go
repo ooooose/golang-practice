@@ -3,7 +3,6 @@ package handlers
 import (
 	"fmt"
 	"io"
-  "errors"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -27,13 +26,8 @@ func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 	//fmt.Printf("%+v\n", reqArticle)
 
 	article := reqArticle
-	jsonData, err := json.Marshal(article)
-	if err != nil {
-		http.Error(w, "fail to encode json\n", http.StatusInternalServerError)
-		return
-	}
 
-	w.Write(jsonData)
+  json.NewEncoder(w).Encode(article)
 }
 
 func ArticleListHandler(w http.ResponseWriter, req *http.Request) {
