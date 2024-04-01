@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"io"
+	"log"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -45,14 +46,12 @@ func ArticleListHandler(w http.ResponseWriter, req *http.Request) {
 		page = 1
 	}
 
-  articleList := []models.Article{models.Article1, models.Article2}
-  jsonData, err := json.Marshal(articleList)
-  if err != nil {
-    errMsg := fmt.Sprintf("fail to encode json (page %d)\n", page)
-    http.Error(w, errMsg, http.StatusInternalServerError)
-  }
+  log.Println(page)
 
-  w.Write(jsonData)
+  articleList := []models.Article{models.Article1, models.Article2}
+  json.NewEncoder(w).Encode(articleList)
+
+  json.NewEncoder(w).Encode(articleList)
 }
 
 func ArticleDetailHandler(w http.ResponseWriter, req *http.Request) {
