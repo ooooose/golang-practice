@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "time"
+		"encoding/json"
 )
 
 type Comment struct {
@@ -47,5 +48,12 @@ func main() {
 		CreatedAt:   time.Now(),
 	}
 
-	fmt.Printf("%+v\n", article)
+	// fmt.Printf("%+v\n", article)
+	jsonData, err := json.Marshal(article)
+	if err != nil {
+		fmt.Println(err)
+		return 
+	}
+
+	fmt.Printf("%s\n", jsonData)
 }
