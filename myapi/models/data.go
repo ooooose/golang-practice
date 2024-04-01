@@ -1,12 +1,12 @@
 package models
 import "time"
 var (
-Comment1 = Comment{
+    Comment1 = Comment{
         CommentID: 1,
         ArticleID: 1,
         Message:   "test comment1",
         CreatedAt: time.Now(),
-}
+    }
     Comment2 = Comment{
         CommentID: 2,
         ArticleID: 1,
@@ -31,5 +31,5 @@ var (
         UserName:  "saki",
         NiceNum:   2,
         CreatedAt: time.Now(),
-} 
+    } 
 )
