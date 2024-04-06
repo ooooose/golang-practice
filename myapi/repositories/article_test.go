@@ -29,7 +29,7 @@ func TestSelectArticleDetail(t *testing.T) {
         Title:    "firstPost",
         Contents: "This is my first blog",
         UserName: "saki",
-        NiceNum:  2,
+        NiceNum:  3,
     }
 
     got, err := repositories.SelectArticleDetail(db, expected.ID)
