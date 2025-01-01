@@ -32,7 +32,13 @@ func PostArticleHandler(w http.ResponseWriter, req *http.Request) {
 
 	defer req.Body.Close()
 
-	article := models.Article1
+	var reqArticle models.Article
+	if err := json.Unmarshal(reqBodybuffer, &reqArticle); err != nil {
+		http.Error(w, "fail to decode json\n", http.StatusBadRequest)
+		return
+	}
+
+	article := reqArticle
 	jsonData, err := json.Marshal(article)
 
 	if err != nil {
