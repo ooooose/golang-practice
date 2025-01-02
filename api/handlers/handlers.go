@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -42,19 +42,25 @@ func ArticleListHandler(w http.ResponseWriter, req *http.Request) {
 	} else {
 		page = 1
 	}
-	resString := fmt.Sprintf("Article List (page %d)\n", page)
-	io.WriteString(w, resString)
+
+	log.Println(page)
+	
+	articleList := []models.Article{models.Article1, models.Article2}
+	json.NewEncoder(w).Encode(articleList)
 }
 
 func ArticleDetailHandler(w http.ResponseWriter, req *http.Request) {
-	articleId, err := strconv.Atoi(mux.Vars(req)["id"])
+	articleID, err := strconv.Atoi(mux.Vars(req)["id"])
 	if err != nil {
 		http.Error(w, "Invalid query parameter", http.StatusBadRequest)
 		return
 	}
 
-	resString := fmt.Sprintf(("Article  No.%d\n"), articleId)
-	io.WriteString(w, resString)
+	log.Println(articleID)
+
+	article := models.Article1
+	
+	json.NewEncoder(w).Encode(article)
 }
 
 func PostNiceHandler(w http.ResponseWriter, req *http.Request) {
