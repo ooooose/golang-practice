@@ -24,11 +24,18 @@ func main() {
 
 	defer db.Close()
 
-	if err := db.Ping(); err != nil {
+	const sqlStr = `
+	  select title, contents, username, nice
+		from articles;
+	`
+
+	rows, err := db.Query(sqlStr)
+	if err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println("connect to DB")
+		return
 	}
+
+	defer rows.Close()
 
 	r := mux.NewRouter()
 
