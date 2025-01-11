@@ -89,7 +89,7 @@ func UpdateNiceNum(db *sql.DB, articleID int) error {
 	}
 
 	row := tx.QueryRow(sqlGetNice, articleID)
-	if err != nil {
+	if err := row.Err(); err != nil {
 		tx.Rollback()
 		return err
 	}
